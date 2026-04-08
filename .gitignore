@@ -1,0 +1,14 @@
+# 文件夹
+build/
+devel/
+install/
+log/
+
+# 编辑器配置
+.vscode/
+.idea/
+*.swp
+
+# Python 运行时垃圾
+__pycache__/
+*.pyc
