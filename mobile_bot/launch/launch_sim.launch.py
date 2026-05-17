@@ -44,6 +44,16 @@ def generate_launch_description():
         }.items(),
     )
 
+    twist_mux_params = os.path.join(
+        get_package_share_directory(package_name), "config", "twist_mux.yaml"
+    )
+    twist_mux = Node(
+        package="twist_mux",
+        executable="twist_mux",
+        parameters=[twist_mux_params, {"use_sim_time": True}],
+        remappings=[("/cmd_vel_out", "/diff_cont/cmd_vel_unstamped")],
+    )
+
     gazebo_params_file = os.path.join(
         get_package_share_directory(package_name), "config", "gazebo_params.yaml"
     )
@@ -111,6 +121,7 @@ def generate_launch_description():
             # 别忘了把声明参数的 Action 放入列表
             declare_use_ros2_control_arg,
             rsp,
+            twist_mux,
             gazebo,
             spawn_entity,
             delayed_diff_drive_spawner,
